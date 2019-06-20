@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {nodejs "nodejs 10.16 LTS"}
   environment {
-    BRANCH='master'
+    BRANCH=getGitBranchName()
   }
   stages{
     stage("init") {
