@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {nodejs "nodejs 10.16 LTS"}
   environment {
-    BRANCH=getGitBranchName()
+    echo "branch is ${scm.branches[0]}"
   }
   stages{
     stage("init") {
