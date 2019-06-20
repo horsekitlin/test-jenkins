@@ -4,14 +4,19 @@ pipeline {
   stages{
     stage("init") {
       steps {
-        sh 'node --version'
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} GIT_BRANCH: ${env.GIT_BRANCH}"
         echo "====Testing....===="
       }
     }
+    stage('test') {
+      steps {
+        sh 'yarn install'
+        sh 'yarn test'
+      }
+    }
     stage("build") {
       steps {
-         sh 'printenv'
+        sh 'printenv'
         echo "====Building....===="
       }
     }
