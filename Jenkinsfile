@@ -27,6 +27,7 @@ pipeline {
       steps {
         echo "====Deploy....===="
         sh "ls"
+        sh "gulp deploy"
       }
     }
   }
