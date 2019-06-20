@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {nodejs "nodejs 10.16 LTS"}
   environment {
-    BRANCH="${GIT_BRANCH}"
+    BRANCH="${GIT_BRANCH.split("/")[1]}"
   }
   stages{
     stage("init") {
