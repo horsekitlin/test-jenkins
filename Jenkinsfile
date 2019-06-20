@@ -9,6 +9,7 @@ pipeline {
     }
     stage("build") {
       steps {
+         sh 'printenv'
         echo "====Building....===="
       }
     }
