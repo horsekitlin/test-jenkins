@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {nodejs "nodejs 10.16 LTS"}
   environment {
-    echo "${env.GIT_BRANCH}"
+    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} GIT_BRANCH: ${env.GIT_BRANCH}"
     DISABLE_AUTH = 'true'
     DB_ENGINE    = 'sqlite'
   }
