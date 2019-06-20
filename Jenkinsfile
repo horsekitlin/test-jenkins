@@ -4,8 +4,9 @@ pipeline {
   stages{
     stage("init") {
       steps {
-        def (remote, branch) = env.GIT_BRANCH.tokenize( '/' )
-
+        def values = env.GIT_BRANCH.tokenize( '/' )
+        String a = env.GIT_BRANCH.split('-')[0] as String
+        String b = env.GIT_BRANCH.split('-')[1] as String
         echo "remote ${remote} branch is ${branch}"
         sh 'yarn install'
       }
