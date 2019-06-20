@@ -4,13 +4,11 @@ pipeline {
   stages{
     stage("init") {
       steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} GIT_BRANCH: ${env.GIT_BRANCH}"
-        echo "====Testing....===="
+        sh 'yarn install'
       }
     }
     stage('test') {
       steps {
-        sh 'yarn install'
         sh 'yarn test:CI'
       }
     }
@@ -21,10 +19,34 @@ pipeline {
       }
     }
     stage("deploy") {
+      when {
+        expression {
+          currentBuild.result == null || currentBuild.result == 'SUCCESS'
+        }
+      }
       steps {
-        echo "====Deploy....===="
+        script {
+          def server = Artifactory.server 'My_Artifactory'
+          uploadArtifact(server)
+        }
       }
     }
   }
 }
 
+
+def uploadArtifact(server) {
+  def uploadSpec = """{
+            "files": [
+              {
+                "pattern": "continuous-test-code-coverage-guide*.tgz",
+                "target": "npm-stable/"
+              }
+           ]
+          }"""
+  server.upload(uploadSpec)
+
+  def buildInfo = Artifactory.newBuildInfo()
+  server.upload spec: uploadSpec, buildInfo: buildInfo
+  server.publishBuildInfo buildInfo
+}

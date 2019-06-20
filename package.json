@@ -10,13 +10,24 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:CI": "CI=true react-scripts test",
+    "test": "react-scripts test --color",
+    "test:CI": "CI=true react-scripts test --color --reporters=default --reporters=jest-junit --coverage --coverageDirectory=output/coverage/jest",
     "eject": "react-scripts eject",
     "deploy-qat": "NODE_ENV=QAT gulp"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/**/__stories__/",
+      "!<rootDir>/node_modules/"
+    ],
+    "coverageReporters": [
+      "jest-junit"
+    ]
   },
   "browserslist": {
     "production": [
@@ -37,8 +48,11 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "dotenv": "^8.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "gulp": "^4.0.2",
     "gulp-rsync": "^0.0.8",
-    "gulp-scp2": "^0.2.0"
+    "gulp-scp2": "^0.2.0",
+    "jest-junit": "^6.4.0"
   }
 }
