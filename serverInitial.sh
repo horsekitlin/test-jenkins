@@ -13,3 +13,6 @@ source ~/.bash_profile
 # install node: 10.16.0 LTS
 nvm install 10.16.0
 nvm alias default 10.16.0
+
+# install yarn
+npm install -g yarn

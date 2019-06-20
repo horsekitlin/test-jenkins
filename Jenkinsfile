@@ -3,6 +3,7 @@ pipeline {
   stages{
     stage("init") {
       steps {
+        sh 'npm install -g yarn'
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} GIT_BRANCH: ${env.GIT_BRANCH}"
         echo "====Testing....===="
       }
