@@ -3,16 +3,11 @@ pipeline {
   tools {nodejs "nodejs 10.16 LTS"}
   stages{
     stage("init") {
-      node {
-        echo 'Pulling...' + env.BRANCH_NAME
+      steps {
+        BRANCH=getGitBranchName()
+        echo "branch is ${BRANCH}"
+        sh 'yarn install'
       }
-      // steps {
-      //   def values = env.GIT_BRANCH.tokenize( '/' )
-      //   String a = env.GIT_BRANCH.split('-')[0] as String
-      //   String b = env.GIT_BRANCH.split('-')[1] as String
-      //   echo "remote ${remote} branch is ${branch}"
-      //   sh 'yarn install'
-      // }
     }
     stage('test') {
       steps {
@@ -38,4 +33,8 @@ pipeline {
       }
     }
   }
+}
+
+def getGitBranchName() {
+    return scm.branches[0].name
 }
