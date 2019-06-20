@@ -1,19 +1,15 @@
 #!/bin/bash
 
-# install docker
-apt-get remove docker docker-engine docker.io containerd runc
+# Ubuntu 16
 apt-get update
-apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-apt-key fingerprint 0EBFCD88
-add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-apt-get update
-apt-get install -y docker-ce docker-ce-cli containerd.io
+apt-get install curl wget
+
+# install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+echo "export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm\" [ -s "$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> ~/.bash_profile
+source ~/.bash_profile
+
+# install node: 10.16.0 LTS
+nvm install 10.16.0
+nvm alias default 10.16.0
