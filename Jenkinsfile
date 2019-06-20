@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {nodejs "nodejs 10.16 LTS"}
   environment {
-    echo "branch is ${scm.branches[0]}"
+    BRANCH=scm.branches[0]
   }
   stages{
     stage("init") {
