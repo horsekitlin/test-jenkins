@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+        image 'node:10.16.0' 
+        args '-p 3000:3000' 
+    }
+  }
   stages{
     stage("init") {
       steps {
@@ -10,6 +15,7 @@ pipeline {
     stage("build") {
       steps {
          sh 'printenv'
+         sh 'yarn install'
         echo "====Building....===="
       }
     }
