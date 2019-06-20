@@ -7,7 +7,7 @@ pipeline {
   stages{
     stage("init") {
       steps {
-        echo "branch is master"
+        echo "branch is ${env.BRANCH}"
         sh 'yarn install'
       }
     }
