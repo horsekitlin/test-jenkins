@@ -1,11 +1,13 @@
 pipeline {
   agent any
   tools {nodejs "nodejs 10.16 LTS"}
+  environment {
+    BRANCH='master'
+  }
   stages{
     stage("init") {
       steps {
-        BRANCH=getGitBranchName()
-        echo "branch is ${BRANCH}"
+        echo "branch is master"
         sh 'yarn install'
       }
     }
