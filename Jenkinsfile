@@ -3,6 +3,9 @@ pipeline {
   stages{
     stage("init") {
       steps {
+        def username = 'Jenkins'
+        echo 'Hello Mr. ${username}'
+        echo "I said, Hello Mr. ${username}"
         echo "====Testing....===="
       }
     }
