@@ -3,7 +3,7 @@ pipeline {
   stages{
     stage("init") {
       steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} env: ${env}"
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} GIT_BRANCH: ${env.GIT_BRANCH}"
         echo "====Testing....===="
       }
     }
