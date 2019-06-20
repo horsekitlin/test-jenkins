@@ -11,7 +11,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy-qat": "NODE_ENV=QAT gulp"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +28,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "dotenv": "^8.0.0",
+    "gulp": "^4.0.2",
+    "gulp-rsync": "^0.0.8",
+    "gulp-scp2": "^0.2.0"
   }
 }
