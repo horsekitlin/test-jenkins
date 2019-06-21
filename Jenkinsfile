@@ -8,7 +8,7 @@ pipeline {
   stages{
     stage("init") {
       steps {
-        sh "cp /var/local/envs/${BRANCH}.env ./"
+        sh "cp /var/local/envs/${PACKAGE_NAME}/${BRANCH}.env ./"
         sh "yarn install"
       }
     }
