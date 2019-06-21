@@ -36,7 +36,9 @@ function deployToServerTask() {
     .src('build/**')
     .pipe(
       scp(scpConfig)
-    );
+    ).on('error', error => {
+      throw error;
+    });
 }
 
 function defaultTask(cb) {
