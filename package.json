@@ -26,6 +26,8 @@
       "!<rootDir>/node_modules/"
     ],
     "coverageReporters": [
+      "text",
+      "cobertura",
       "jest-junit"
     ]
   },
