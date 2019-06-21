@@ -1,13 +1,14 @@
 pipeline {
   agent any
-  tools {nodejs "nodejs 10.16 LTS"}
+  tools {nodejs 'nodejs 10.16 LTS'}
   environment {
-    BRANCH="${GIT_BRANCH.split("/")[1]}"
+    BRANCH='${GIT_BRANCH.split('/')[1]}'
+    PACKAGE_NAME='test-jenkins'
   }
   stages{
-    stage("init") {
+    stage('init') {
       steps {
-        echo "branch is ${env.BRANCH}"
+        sh 'cp /var/local/envs/${BRANCH}.env ./'
         sh 'yarn install'
       }
     }
@@ -16,27 +17,23 @@ pipeline {
         sh 'yarn test:CI'
       }
     }
-    stage("build") {
+    stage('build') {
       steps {
         sh 'printenv'
-        echo "====Building....===="
+        echo '====Building....===='
       }
     }
-    stage("deploy") {
+    stage('deploy') {
       when {
         expression {
           currentBuild.result == null || currentBuild.result == 'SUCCESS'
         }
       }
       steps {
-        echo "====Deploy....===="
-        sh "ls"
-        sh "gulp deploy"
+        echo '====Deploy....===='
+        sh 'ls'
+        sh 'gulp deploy'
       }
     }
   }
-}
-
-def getGitBranchName() {
-    return scm.branches[0].name
 }
