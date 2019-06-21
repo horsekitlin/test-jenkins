@@ -18,7 +18,14 @@ pipeline {
       }
        post {
         always {
-          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+          publishHTML target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll             : true,
+            reportDir            : 'output/coverage/jest',
+            reportFiles          : 'index.html',
+            reportName           : 'Test Report'
+          ]
         }
       }
     }
@@ -35,27 +42,10 @@ pipeline {
         }
       }
       steps {
-        script {
-          def server = Artifactory.server 'My_Artifactory'
-          uploadArtifact(server)
-        }
+        echo "====Deploy....===="
+        sh "ls"
+        sh "gulp deploy"
       }
     }
   }
-}
-
-def uploadArtifact(server) {
-  def uploadSpec = """{
-            "files": [
-              {
-                "pattern": "continuous-test-code-coverage-guide*.tgz",
-                "target": "npm-stable/"
-              }
-           ]
-          }"""
-  server.upload(uploadSpec)
-
-  def buildInfo = Artifactory.newBuildInfo()
-  server.upload spec: uploadSpec, buildInfo: buildInfo
-  server.publishBuildInfo buildInfo
 }

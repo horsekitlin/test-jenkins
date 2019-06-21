@@ -29,7 +29,7 @@
     ],
     "coverageReporters": [
       "text",
-      "cobertura"
+      "html"
     ]
   },
   "browserslist": {
