@@ -16,9 +16,9 @@ pipeline {
       steps {
         sh "yarn test:CI"
       }
-      post {
+       post {
         always {
-          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+            junit 'output/coverage/**/*.xml'
         }
       }
     }
