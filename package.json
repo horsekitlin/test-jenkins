@@ -11,7 +11,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --color",
-    "test:CI": "CI=true react-scripts test --color --coverage --coverageDirectory=output/coverage/jest",
+    "test:CI": "CI=true react-scripts test --color --reporters=jest-junit --coverage --coverageDirectory=output/coverage/jest",
     "eject": "react-scripts eject",
     "deploy-qat": "NODE_ENV=QAT gulp"
   },
@@ -27,8 +27,7 @@
     ],
     "coverageReporters": [
       "text",
-      "cobertura",
-      "jest-junit"
+      "cobertura"
     ]
   },
   "browserslist": {
@@ -55,6 +54,7 @@
     "gulp": "^4.0.2",
     "gulp-rsync": "^0.0.8",
     "gulp-scp2": "^0.2.0",
+    "jest-jenkins-reporter": "^1.0.2",
     "jest-junit": "^6.4.0"
   }
 }
